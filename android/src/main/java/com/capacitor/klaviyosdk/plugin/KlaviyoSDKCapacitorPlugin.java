@@ -12,11 +12,28 @@ public class KlaviyoSDKCapacitorPlugin extends Plugin {
     private KlaviyoSDKCapacitor implementation = new KlaviyoSDKCapacitor();
 
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    public void initSDK(PluginCall call) {
+        String value = call.getString("klaviyoKey");
 
         JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
+        ret.put("result", true);
+        call.resolve(ret);
+    }
+
+    @PluginMethod
+    public void setUser(PluginCall call) {
+        String email = call.getString("email");
+        String firstName = call.getString("firstName");
+
+        JSObject ret = new JSObject();
+        ret.put("result", true);
+        call.resolve(ret);
+    }
+
+    @PluginMethod
+    public void setPushToken(PluginCall call) {
+        JSObject ret = new JSObject();
+        ret.put("token", "test-token");
         call.resolve(ret);
     }
 }

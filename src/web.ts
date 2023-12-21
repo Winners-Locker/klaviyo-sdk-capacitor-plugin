@@ -6,8 +6,21 @@ export class KlaviyoSDKCapacitorWeb
   extends WebPlugin
   implements KlaviyoSDKCapacitorPlugin
 {
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
-    return options;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  initSDK(_options: { klaviyoKey: string }): Promise<{ result: boolean }> {
+    throw new Error('Method not implemented.');
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setUser(_options: {
+    email: string;
+    firstName: string;
+  }): Promise<{ result: boolean }> {
+    throw new Error('Method not implemented.');
+  }
+  requestPushPermission(): Promise<{ result: boolean }> {
+    throw new Error('Method not implemented.');
+  }
+  setPushToken(): Promise<{ token: string }> {
+    throw new Error('Method not implemented.');
   }
 }

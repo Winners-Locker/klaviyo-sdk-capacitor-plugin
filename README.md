@@ -13,24 +13,64 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
+* [`initSDK(...)`](#initsdk)
+* [`setUser(...)`](#setuser)
+* [`requestPushPermission()`](#requestpushpermission)
+* [`setPushToken()`](#setpushtoken)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### echo(...)
+### initSDK(...)
 
 ```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
+initSDK(options: { klaviyoKey: string; }) => Promise<{ result: boolean; }>
 ```
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
+| Param         | Type                                 |
+| ------------- | ------------------------------------ |
+| **`options`** | <code>{ klaviyoKey: string; }</code> |
 
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+**Returns:** <code>Promise&lt;{ result: boolean; }&gt;</code>
+
+--------------------
+
+
+### setUser(...)
+
+```typescript
+setUser(options: { email: string; firstName: string; }) => Promise<{ result: boolean; }>
+```
+
+| Param         | Type                                               |
+| ------------- | -------------------------------------------------- |
+| **`options`** | <code>{ email: string; firstName: string; }</code> |
+
+**Returns:** <code>Promise&lt;{ result: boolean; }&gt;</code>
+
+--------------------
+
+
+### requestPushPermission()
+
+```typescript
+requestPushPermission() => Promise<{ result: boolean; }>
+```
+
+**Returns:** <code>Promise&lt;{ result: boolean; }&gt;</code>
+
+--------------------
+
+
+### setPushToken()
+
+```typescript
+setPushToken() => Promise<{ token: string; }>
+```
+
+**Returns:** <code>Promise&lt;{ token: string; }&gt;</code>
 
 --------------------
 
