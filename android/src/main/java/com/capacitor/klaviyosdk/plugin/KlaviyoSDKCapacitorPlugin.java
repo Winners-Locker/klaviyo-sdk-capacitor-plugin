@@ -15,8 +15,9 @@ public class KlaviyoSDKCapacitorPlugin extends Plugin {
 
     @PluginMethod
     public void initSDK(PluginCall call) {
-        String value = call.getString("klaviyoKey");
+        String key = call.getString("klaviyoKey");
 
+        Klaviyo.INSTANCE.initialize(key, getActivity().getApplicationContext());
         JSObject ret = new JSObject();
         ret.put("result", true);
         call.resolve(ret);
@@ -38,6 +39,8 @@ public class KlaviyoSDKCapacitorPlugin extends Plugin {
     @PluginMethod
     public void setPushToken(PluginCall call) {
         JSObject ret = new JSObject();
+        String token = call.getString("token");
+        Klaviyo.INSTANCE.setPushToken(token);
         ret.put("token", "test-token");
         call.resolve(ret);
     }
