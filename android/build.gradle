@@ -8,8 +8,8 @@ ext {
 buildscript {
     repositories {
         google()
-        mavenCentral()
         maven { url "https://jitpack.io" }
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.0.0'
@@ -22,7 +22,7 @@ android {
     namespace "com.capacitor.klaviyosdk.plugin"
     compileSdkVersion project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 33
     defaultConfig {
-        minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 22
+        minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 23
         targetSdkVersion project.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 33
         versionCode 1
         versionName "1.0"
@@ -45,10 +45,9 @@ android {
 
 repositories {
     google()
-    mavenCentral()
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
-
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
