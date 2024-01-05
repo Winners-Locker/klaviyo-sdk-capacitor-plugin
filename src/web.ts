@@ -20,7 +20,8 @@ export class KlaviyoSDKCapacitorWeb
   requestPushPermission(): Promise<{ result: boolean }> {
     throw new Error('Method not implemented.');
   }
-  setPushToken(): Promise<{ token: string }> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setPushToken(_options: { token: string }): Promise<{ token: string }> {
     throw new Error('Method not implemented.');
   }
 }

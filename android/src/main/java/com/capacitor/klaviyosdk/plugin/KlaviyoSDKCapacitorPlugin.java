@@ -5,6 +5,8 @@ import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import com.klaviyo.analytics.Klaviyo;
+import com.klaviyo.analytics.model.ProfileKey;
 
 @CapacitorPlugin(name = "KlaviyoSDKCapacitor")
 public class KlaviyoSDKCapacitorPlugin extends Plugin {
@@ -13,27 +15,47 @@ public class KlaviyoSDKCapacitorPlugin extends Plugin {
 
     @PluginMethod
     public void initSDK(PluginCall call) {
-        String value = call.getString("klaviyoKey");
-
-        JSObject ret = new JSObject();
-        ret.put("result", true);
-        call.resolve(ret);
+        try {
+            String key = call.getString("klaviyoKey");
+            Klaviyo.INSTANCE.initialize(key, getActivity().getApplicationContext());
+            JSObject ret = new JSObject();
+            ret.put("result", key);
+            call.resolve(ret);
+        } catch (Error e) {
+            JSObject ret = new JSObject();
+            ret.put("result", false);
+            call.resolve(ret);
+        }
     }
 
     @PluginMethod
     public void setUser(PluginCall call) {
-        String email = call.getString("email");
-        String firstName = call.getString("firstName");
-
-        JSObject ret = new JSObject();
-        ret.put("result", true);
-        call.resolve(ret);
+        try {
+            String email = call.getString("email");
+            String firstName = call.getString("firstName");
+            Klaviyo.INSTANCE.setEmail(email).setProfileAttribute(ProfileKey.FIRST_NAME.INSTANCE, firstName);
+            JSObject ret = new JSObject();
+            ret.put("result", email);
+            call.resolve(ret);
+        } catch (Error e) {
+            JSObject ret = new JSObject();
+            ret.put("result", false);
+            call.resolve(ret);
+        }
     }
 
     @PluginMethod
     public void setPushToken(PluginCall call) {
-        JSObject ret = new JSObject();
-        ret.put("token", "test-token");
-        call.resolve(ret);
+        try {
+            String token = call.getString("token");
+            Klaviyo.INSTANCE.setPushToken(token);
+            JSObject ret = new JSObject();
+            ret.put("token", token);
+            call.resolve(ret);
+        } catch (Error e) {
+            JSObject ret = new JSObject();
+            ret.put("token", false);
+            call.resolve(ret);
+        }
     }
 }

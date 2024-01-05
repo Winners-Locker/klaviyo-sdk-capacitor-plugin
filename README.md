@@ -16,7 +16,7 @@ npx cap sync
 * [`initSDK(...)`](#initsdk)
 * [`setUser(...)`](#setuser)
 * [`requestPushPermission()`](#requestpushpermission)
-* [`setPushToken()`](#setpushtoken)
+* [`setPushToken(...)`](#setpushtoken)
 
 </docgen-index>
 
@@ -64,11 +64,15 @@ requestPushPermission() => Promise<{ result: boolean; }>
 --------------------
 
 
-### setPushToken()
+### setPushToken(...)
 
 ```typescript
-setPushToken() => Promise<{ token: string; }>
+setPushToken(options: { token: string; }) => Promise<{ token: string; }>
 ```
+
+| Param         | Type                            |
+| ------------- | ------------------------------- |
+| **`options`** | <code>{ token: string; }</code> |
 
 **Returns:** <code>Promise&lt;{ token: string; }&gt;</code>
 
