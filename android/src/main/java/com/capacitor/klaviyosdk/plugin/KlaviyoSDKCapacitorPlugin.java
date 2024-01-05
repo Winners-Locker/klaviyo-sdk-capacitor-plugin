@@ -33,9 +33,7 @@ public class KlaviyoSDKCapacitorPlugin extends Plugin {
         try {
             String email = call.getString("email");
             String firstName = call.getString("firstName");
-            Klaviyo.INSTANCE
-                    .setEmail(email)
-                    .setProfileAttribute(ProfileKey.FIRST_NAME.INSTANCE, firstName);
+            Klaviyo.INSTANCE.setEmail(email).setProfileAttribute(ProfileKey.FIRST_NAME.INSTANCE, firstName);
             JSObject ret = new JSObject();
             ret.put("result", email);
             call.resolve(ret);
@@ -50,7 +48,7 @@ public class KlaviyoSDKCapacitorPlugin extends Plugin {
     public void setPushToken(PluginCall call) {
         try {
             String token = call.getString("token");
-            Klaviyo.INSTANCE.setPushToken("test-token");
+            Klaviyo.INSTANCE.setPushToken(token);
             JSObject ret = new JSObject();
             ret.put("token", token);
             call.resolve(ret);
