@@ -3,41 +3,74 @@ import Capacitor
 import KlaviyoSwift
 import UserNotifications
 
-/**
- * Please read the Capacitor iOS Plugin Development Guide
- * here: https://capacitorjs.com/docs/plugins/ios
- */
 @objc(KlaviyoSDKCapacitorPlugin)
-public class KlaviyoSDKCapacitorPlugin: CAPPlugin {
-    private let implementation = KlaviyoSDKCapacitor()
-
-    @objc func initSDK(_ call: CAPPluginCall) {
-        let value = call.getString("klaviyoKey") ?? ""
-        KlaviyoSDK().initialize(with: value)
-        call.resolve([
-            "result": true
-        ])
-    }
-
-    @objc func setUser(_ call: CAPPluginCall) {
-        let value = call.getString("email") ?? ""
-        KlaviyoSDK().set(email: value)
-        call.resolve([
-            "result": true
-        ])
+public class KlaviyoSDKCapacitorPlugin: CAPPlugin, UNUserNotificationCenterDelegate {
+  private let implementation = KlaviyoSDKCapacitor()
+  
+  public override func load() {
+    // Listen for the notification from the AppDelegate
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(self.didRegisterForRemoteNotifications(notification:)),
+                                           name: .capacitorDidRegisterForRemoteNotifications,
+                                           object: nil)
+    UNUserNotificationCenter.current().delegate = self
+  }
+  
+  @objc private func didRegisterForRemoteNotifications(notification: Notification) {
+    guard let deviceToken = notification.object as? String else {
+      return
     }
     
-    // this is not needed
-    @objc func requestPushPermission(_ call: CAPPluginCall) {
-        call.resolve([
-            "result": true
-        ])
-    }
+    // Handle the device token
+    KlaviyoSDK().set(pushToken: deviceToken)
+  }
+  
+  @objc func initSDK(_ call: CAPPluginCall) {
+    let value = call.getString("klaviyoKey") ?? ""
+    KlaviyoSDK().initialize(with: value)
+    call.resolve([
+      "result": true
+    ])
+  }
+  
+  func setUser(_ call: CAPPluginCall) {
+    let value = call.getString("email") ?? ""
+    KlaviyoSDK().set(email: value)
+    call.resolve([
+      "result": true
+    ])
+  }
+}
 
-    // this is not needed
-    @objc func setPushToken(_ call: CAPPluginCall) {
-      call.resolve([
-          "result": true
-      ])
+extension KlaviyoSDKCapacitorPlugin {
+  // below method will be called when the user interacts with the push notification
+  public func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void) {
+      if #available(iOS 16.0, *) {
+        UNUserNotificationCenter.current().setBadgeCount(UIApplication.shared.applicationIconBadgeNumber - 1)
+      } else {
+        UIApplication.shared.applicationIconBadgeNumber -= 1
+      }
+      
+      // If this notification is Klaviyo's notification we'll handle it
+      // else pass it on to the next push notification service to which it may belong
+      let handled = KlaviyoSDK().handle(notificationResponse: response, withCompletionHandler: completionHandler)
+      if !handled {
+        completionHandler()
+      }
+    }
+  
+  // below method is called when the app receives push notifications when the app is the foreground
+  public func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+      if #available(iOS 14.0, *) {
+        completionHandler([.list, .banner])
+      } else {
+        completionHandler([.alert])
+      }
     }
 }
