@@ -17,7 +17,7 @@ public class KlaviyoSDKCapacitorPlugin: CAPPlugin, UNUserNotificationCenterDeleg
   }
   
   @objc private func didRegisterForRemoteNotifications(notification: Notification) {
-    guard let deviceToken = notification.object as? String else {
+    guard let deviceToken = notification.object as? Data else {
       return
     }
     
