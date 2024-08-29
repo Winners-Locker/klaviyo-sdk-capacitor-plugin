@@ -9,20 +9,7 @@ public class KlaviyoSDKCapacitorPlugin: CAPPlugin, UNUserNotificationCenterDeleg
   
   public override func load() {
     // Listen for the notification from the AppDelegate
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(self.didRegisterForRemoteNotifications(notification:)),
-                                           name: .capacitorDidRegisterForRemoteNotifications,
-                                           object: nil)
     UNUserNotificationCenter.current().delegate = self
-  }
-  
-  @objc private func didRegisterForRemoteNotifications(notification: Notification) {
-    guard let deviceToken = notification.object as? Data else {
-      return
-    }
-    
-    // Handle the device token
-    KlaviyoSDK().set(pushToken: deviceToken)
   }
   
   @objc func initSDK(_ call: CAPPluginCall) {
