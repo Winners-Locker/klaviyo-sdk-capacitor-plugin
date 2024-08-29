@@ -1,6 +1,6 @@
 {
   "name": "klaviyo-sdk-capacitor-plugin",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Capacitor Plugin for Klaviyo SDK",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
