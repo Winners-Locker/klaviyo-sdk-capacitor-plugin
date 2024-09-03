@@ -41,12 +41,12 @@ initSDK(options: { klaviyoKey: string; }) => Promise<{ result: boolean; }>
 ### setUser(...)
 
 ```typescript
-setUser(options: { email: string; firstName: string; }) => Promise<{ result: boolean; }>
+setUser(options: { email: string; firstName: string; lastName: string; }) => Promise<{ result: boolean; }>
 ```
 
-| Param         | Type                                               |
-| ------------- | -------------------------------------------------- |
-| **`options`** | <code>{ email: string; firstName: string; }</code> |
+| Param         | Type                                                                 |
+| ------------- | -------------------------------------------------------------------- |
+| **`options`** | <code>{ email: string; firstName: string; lastName: string; }</code> |
 
 **Returns:** <code>Promise&lt;{ result: boolean; }&gt;</code>
 

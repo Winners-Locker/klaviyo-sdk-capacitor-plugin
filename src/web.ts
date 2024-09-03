@@ -14,6 +14,7 @@ export class KlaviyoSDKCapacitorWeb
   setUser(_options: {
     email: string;
     firstName: string;
+    lastName: string;
   }): Promise<{ result: boolean }> {
     throw new Error('Method not implemented.');
   }
