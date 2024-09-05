@@ -20,7 +20,7 @@ public class KlaviyoSDKCapacitorPlugin: CAPPlugin, UNUserNotificationCenterDeleg
     ])
   }
   
-  func setUser(_ call: CAPPluginCall) {
+  @objc func setUser(_ call: CAPPluginCall) {
     let email = call.getString("email") ?? ""
     let firstName = call.getString("firstName") ?? ""
     let lastName = call.getString("lastName") ?? ""
