@@ -7,4 +7,5 @@ export interface KlaviyoSDKCapacitorPlugin {
   }): Promise<{ result: boolean }>;
   requestPushPermission(): Promise<{ result: boolean }>; // only required for IOS
   setPushToken(options: { token: string }): Promise<{ token: string }>;
+  resetProfile(): Promise<{ result: boolean; }>;
 }
