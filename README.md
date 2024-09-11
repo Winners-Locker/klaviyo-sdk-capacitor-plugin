@@ -17,6 +17,7 @@ npx cap sync
 * [`setUser(...)`](#setuser)
 * [`requestPushPermission()`](#requestpushpermission)
 * [`setPushToken(...)`](#setpushtoken)
+* [`resetProfile()`](#resetprofile)
 
 </docgen-index>
 
@@ -75,6 +76,16 @@ setPushToken(options: { token: string; }) => Promise<{ token: string; }>
 | **`options`** | <code>{ token: string; }</code> |
 
 **Returns:** <code>Promise&lt;{ token: string; }&gt;</code>
+
+--------------------
+
+### resetProfile()
+
+```typescript
+resetProfile() => Promise<{ result: boolean; }>
+```
+
+**Returns:** <code>Promise&lt;{ result: boolean; }&gt;</code>
 
 --------------------
 

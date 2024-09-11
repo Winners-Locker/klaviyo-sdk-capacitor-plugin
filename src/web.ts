@@ -25,4 +25,7 @@ export class KlaviyoSDKCapacitorWeb
   setPushToken(_options: { token: string }): Promise<{ token: string }> {
     throw new Error('Method not implemented.');
   }
+  resetProfile(): Promise<{ result: boolean; }> {
+    throw new Error('Method not implemented.');
+  }
 }

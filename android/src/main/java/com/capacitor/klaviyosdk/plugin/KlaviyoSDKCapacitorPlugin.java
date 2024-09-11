@@ -58,4 +58,18 @@ public class KlaviyoSDKCapacitorPlugin extends Plugin {
             call.resolve(ret);
         }
     }
+
+    @PluginMethod
+    public void resetProfile(PluginCall call) {
+        try {
+            Klaviyo.INSTANCE.resetProfile();
+            JSObject ret = new JSObject();
+            ret.put("result", true);
+            call.resolve(ret);
+        } catch (Error e) {
+            JSObject ret = new JSObject();
+            ret.put("result", false);
+            call.resolve(ret);
+        }
+    }
 }
