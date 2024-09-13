@@ -8,4 +8,5 @@ CAP_PLUGIN(KlaviyoSDKCapacitorPlugin, "KlaviyoSDKCapacitor",
            CAP_PLUGIN_METHOD(setUser, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(requestPushPermission, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(setPushToken, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(resetProfile, CAPPluginReturnPromise);
 )
