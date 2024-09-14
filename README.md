@@ -79,6 +79,7 @@ setPushToken(options: { token: string; }) => Promise<{ token: string; }>
 
 --------------------
 
+
 ### resetProfile()
 
 ```typescript
